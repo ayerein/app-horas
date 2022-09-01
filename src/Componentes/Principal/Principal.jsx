@@ -12,6 +12,9 @@ const Principal = ({ correoUsuario }) => {
     const [ entradas, definirEntradas ] = useState(null)
     const [ horasTotales, cambioHorasTotales] = useState(0)
 
+    const [ entrada, cambioEntrada ] = useState()
+    const [ salida, cambioSalida ] = useState()
+
     useEffect(()=>{
         async function buscarEntradas(){
             const entradasEncontradas = await buscarCrearEntradas(correoUsuario)
