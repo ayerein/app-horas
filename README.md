@@ -2,6 +2,8 @@
 
 Proyecto personal creado con React, tiene la finalidad de llevar un registro de las horas que ingrese cada usuario.
 
+Para ver la pagina web puedes ingresar en [este link.](https://web-tus-horas.netlify.app)
+
 ## Librerias utilizadas
 
 * Firebase 9.9.2 -
