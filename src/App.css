@@ -1,38 +1,178 @@
-.App {
-  text-align: center;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+main{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+    /* IniciarSesion  */
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+    .contenedor-iniciar-sesion{
+        height: 60vh;
+        width: 50vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
+        box-shadow: 3px 3px 10px 3px rgba(145,145,145,0.72);
+    }
+    .titulo{
+        color: #33338f;
+        font-size: 2.2rem;
+        margin-bottom: 5vh;
+    }
+    .input-iniciar{
+        margin: 1vh 0;
+        width: 40vw;
+        height: 4vh;
+        border: 1px solid rgb(160, 160, 160);
+        border-radius: 5px;
+        text-align: center;
+    }
+    .cambio{
+        margin-top: 1vh;
+        color: #7368cd;
+    }
+    .cambio:hover{
+        cursor: pointer;
+        text-decoration: underline;
+    }
+    .btn-iniciar{
+        margin: 2vh 0;
+        padding: 1vh 4vw;
+        border: 1px solid rgb(160, 160, 160);
+        border-radius: 5px;
+        }
+            .btn-iniciar:hover{
+                cursor: pointer;
+                color: white;
+                background-color: #a394fe;
+            }
 
-.App-link {
-  color: #61dafb;
-}
+    /* Principal */
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+    .contenedor-principal{
+        height: 80vh;
+        width: 90vw;
+        border-radius: 30px;
+        box-shadow: 3px 3px 10px 3px rgba(145,145,145,0.72);
+        display: flex;
+    }
+
+    /* IngresarHoras */
+    
+    .contenedor-ingresar-horas{
+        height: 80vh;
+        width: 30vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        border-right: 1px solid rgb(145,145,145);
+    }
+    
+        .contenedor-form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 40vh;
+        }
+
+            .contenedor-form p{
+                font-size: 1.1rem;
+                margin: 1vh;
+            }
+
+            .contenedor-form input{
+                padding: 1vh 2vw;
+            }
+
+            .btn-agregar-horas{
+                margin-top: 3vh;
+                padding: 1vh 3vw;
+                border: 1px solid rgb(160, 160, 160);
+                border-radius: 5px;
+            }
+                .btn-agregar-horas:hover{
+                    cursor: pointer;
+                    color: white;
+                    background-color: #a394fe;
+                }
+
+        .cerrar-sesion{
+            width: 35vw;
+            text-align: center;
+        }
+            .cerrar-sesion p{
+                padding-bottom: 1vh;
+            }
+            .btn-cerrar-sesion{
+                padding: 4px 2vw;
+                border: 1px solid rgb(160, 160, 160);
+                border-radius: 5px;
+            }
+                .btn-cerrar-sesion:hover{
+                    cursor: pointer;
+                    color: white;
+                    background-color: #a394fe;
+                }
+
+    /* ContenedorEntradas */
+
+    .contenedor-entradas{
+        height: 70vh;
+        width: 60vw;
+        margin: 5vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        .contenedor-entradas-individuales{
+            height: 60vh;
+            width: 50vw;
+            overflow: auto;
+        }
+            .entrada-individual{
+                height: 20vh;
+                display: flex;
+                width: 47vw;
+                flex-direction: column;
+                justify-content: center;
+                border-bottom: 1px solid rgb(160, 160, 160);
+            }
+
+                .p-dia-entrada{
+                    text-align: right;
+                    margin-right: 2vw;
+                }
+                .p-horas{
+                    margin-left: 2vw;
+                    padding: 3px 0;
+                }
+                .btn-eliminar{
+                    padding: 3px 2vw;
+                    margin: 1vh auto 0 auto;
+                    width: 10vw;
+                    border: 1px solid rgb(160, 160, 160);
+                    border-radius: 5px;
+                }
+                    .btn-eliminar:hover{
+                        cursor: pointer;
+                        color: white;
+                        background-color: #a394fe;
+                    }
+        .horas-totales{
+            font-size: 1.2rem;
+        }
