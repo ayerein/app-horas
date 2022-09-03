@@ -11,15 +11,19 @@ const firestore = getFirestore(appFirebase)
 const Principal = ({ correoUsuario }) => {
     const [ entradas, definirEntradas ] = useState(null)
     const [ horasTotales, cambioHorasTotales] = useState(0)
-
+    
     const [ entrada, cambioEntrada ] = useState()
     const [ salida, cambioSalida ] = useState()
+
+    /* const [ año, cambioAño ] = useState(2022) */
+    const [ mes, cambioMes ] = useState()
 
     useEffect(()=>{
         async function buscarEntradas(){
             const entradasEncontradas = await buscarCrearEntradas(correoUsuario)
             definirEntradas(entradasEncontradas)
             calcularHorasTotales(entradasEncontradas)
+            cambioMes(new Date().getMonth()+1)
         }
         buscarEntradas()
     } , [])
@@ -69,18 +73,17 @@ const Principal = ({ correoUsuario }) => {
             )
             
         let diaFormato = new Date(añoEntrada, (mesEntrada -1), diaEntrada)
-        let añoMesFormato = `${añoEntrada}-${mesEntrada}`
         let mostrarDiaEntrada = `${diaEntrada}/${mesEntrada}/${añoEntrada}`
         let mostrarHoraEntrada = `${horaEntrada} horas y ${minEntrada} minutos.`
         let mostrarHoraSalida = `${horaSalida} horas y ${minSalida} minutos.`
-        let mostrarHorasTrabajadas = `${Math.floor(minutos/60)} horas y ${minutos%60} minutos`
+        let mostrarHorasTrabajadas = `${Math.floor(minutos/60)} horas y ${minutos%60} minutos.`
 
         const nuevoArrayEntradas = [ 
             ...entradas,
             {
                 id: + new Date(),
                 diaFormato: diaFormato,
-                añoMesFormato: añoMesFormato,
+                mesFormato: mesEntrada,
                 diaIngreso: mostrarDiaEntrada,
                 ingreso: mostrarHoraEntrada,
                 salida: mostrarHoraSalida,
@@ -95,7 +98,6 @@ const Principal = ({ correoUsuario }) => {
         limpiarHoras()
     }
 
-    
     return(
         <div className='contenedor-principal'>
             <IngresarHoras 
@@ -104,7 +106,6 @@ const Principal = ({ correoUsuario }) => {
             cambioEntrada={cambioEntrada}
             cambioSalida={cambioSalida}
             />
-            
             {
                 entradas ?
                 <ContenedorEntradas 
@@ -113,6 +114,8 @@ const Principal = ({ correoUsuario }) => {
                 correoUsuario={correoUsuario} 
                 definirEntradas={definirEntradas}
                 calcularHorasTotales={calcularHorasTotales}
+                mes={mes}
+                cambioMes={cambioMes}
                 />
                 : null
             }
