@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react'
 
 const firestore = getFirestore(appFirebase)
 
-const ContenedorEntradas = ({ horasTotales, entradas, correoUsuario, definirEntradas, calcularHorasTotales, eliminarEntrada, mes, cambioMes }) => {
+const ContenedorEntradas = ({ horasTotales, entradas, correoUsuario, definirEntradas, calcularHorasTotales, eliminarEntrada, mes, quincena, cambioMes, cambioQuincena }) => {
 
     const [ entradasFiltradas, cambioEntradasFiltradas ] = useState([])
+    const [ entradasFiltradasQuincena, cambioEntradasFiltradasQuincena ] = useState([])
     
     async function eliminarEntrada(idEntrada){
         const nuevoArrayEntradas = entradas.filter((entrada)=> entrada.id !== idEntrada)
@@ -23,17 +24,36 @@ const ContenedorEntradas = ({ horasTotales, entradas, correoUsuario, definirEntr
         else{ return 0 }
     })
 
+    function filtrarQuincena(nuevoArrayEntradas) {
+        if (quincena === 'primera'){
+            let filtradasQuincena = (nuevoArrayEntradas.filter(entrada => entrada.diaEntrada < 15))
+            cambioEntradasFiltradasQuincena(filtradasQuincena)
+            calcularHorasTotales(filtradasQuincena)
+        } if (quincena === 'segunda') {
+            let filtradasQuincena = (nuevoArrayEntradas.filter(entrada => entrada.diaEntrada > 15))
+            cambioEntradasFiltradasQuincena(filtradasQuincena)
+            calcularHorasTotales(filtradasQuincena)
+        } if (quincena === '') {
+            cambioEntradasFiltradasQuincena(entradasFiltradas)
+            calcularHorasTotales(entradasFiltradas)
+        }
+    }
     useEffect(()=>{
-        const nuevoArrayEntradas = (entradas.filter(entrada =>  entrada.mesFormato === parseInt(mes)))
+        let nuevoArrayEntradas = (entradas.filter(entrada =>  entrada.mesFormato === parseInt(mes)))
         cambioEntradasFiltradas(nuevoArrayEntradas)
         calcularHorasTotales(nuevoArrayEntradas)
-    } , [mes, entradas])
+        filtrarQuincena(nuevoArrayEntradas)
+    } , [quincena, mes, entradas])
+
+    function cambiandoMes(valor) {
+        cambioMes(valor)
+        cambioQuincena('')
+    }
 
     return(
         <div className="contenedor-entradas">
             <div className='contenedor-filtro'>
-                {/* <input type="number" value={año} onChange={(e) => {cambioAño(e.target.value)}} /> */}
-                <select name="mes" className='seleccionar-mes' onChange={(e) => {cambioMes(e.target.value)}}>
+                <select name="mes" className='seleccionar-mes' onChange={(e) => {cambiandoMes(e.target.value)}}>
                     <option value="">Filtrar por mes</option>
                     <option value="1">Enero</option>
                     <option value="2">Febrero</option>
@@ -48,15 +68,15 @@ const ContenedorEntradas = ({ horasTotales, entradas, correoUsuario, definirEntr
                     <option value="11">Noviembre</option>
                     <option value="12">Diciembre</option>
                 </select>
-                {/* <select name="quincena" onChange={(e) => {}}>
+                <select name="quincena" className='seleccionar-quincena' id='select-quincena' onChange={(e) => {cambioQuincena(e.target.value)}}>
                     <option value="">Filtrar por quincena</option>
                     <option value="primera">Primer quincena</option>
                     <option value="segunda">Segunda quincena</option>
-                </select>  */}
+                </select> 
             </div>
             <div className='contenedor-entradas-individuales'>
                 {
-                entradasFiltradas.map((entrada)=>{
+                entradasFiltradasQuincena.map((entrada)=>{
                     return(
                         <div className='entrada-individual' key={entrada.id}>
                             <p className='p-dia-entrada'>{entrada.diaIngreso}</p>

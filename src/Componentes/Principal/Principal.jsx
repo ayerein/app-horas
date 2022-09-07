@@ -10,20 +10,25 @@ const firestore = getFirestore(appFirebase)
 
 const Principal = ({ correoUsuario }) => {
     const [ entradas, definirEntradas ] = useState(null)
-    const [ horasTotales, cambioHorasTotales] = useState(0)
+    const [ horasTotales, cambioHorasTotales] = useState()
     
     const [ entrada, cambioEntrada ] = useState()
     const [ salida, cambioSalida ] = useState()
 
-    /* const [ año, cambioAño ] = useState(2022) */
     const [ mes, cambioMes ] = useState()
+    const [ quincena, cambioQuincena ] = useState()
 
     useEffect(()=>{
         async function buscarEntradas(){
             const entradasEncontradas = await buscarCrearEntradas(correoUsuario)
             definirEntradas(entradasEncontradas)
-            calcularHorasTotales(entradasEncontradas)
-            cambioMes(new Date().getMonth()+1)
+            let diaActual = new Date()
+            cambioMes(diaActual.getMonth()+1)
+            if (diaActual.getDay() < 15){
+                cambioQuincena('primera')
+            } else {
+                cambioQuincena('segunda')
+            }
         }
         buscarEntradas()
     } , [])
@@ -82,6 +87,7 @@ const Principal = ({ correoUsuario }) => {
             ...entradas,
             {
                 id: + new Date(),
+                diaEntrada: diaEntrada,
                 diaFormato: diaFormato,
                 mesFormato: mesEntrada,
                 diaIngreso: mostrarDiaEntrada,
@@ -97,6 +103,7 @@ const Principal = ({ correoUsuario }) => {
         calcularHorasTotales(nuevoArrayEntradas)
         limpiarHoras()
     }
+    
 
     return(
         <div className='contenedor-principal'>
@@ -115,7 +122,9 @@ const Principal = ({ correoUsuario }) => {
                 definirEntradas={definirEntradas}
                 calcularHorasTotales={calcularHorasTotales}
                 mes={mes}
+                quincena={quincena}
                 cambioMes={cambioMes}
+                cambioQuincena={cambioQuincena}
                 />
                 : null
             }

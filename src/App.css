@@ -143,6 +143,9 @@ main{
             text-align: end;
         }
             .seleccionar-mes{
+                margin-right: 2vw;
+            }
+            .seleccionar-quincena{
                 margin-right: 4vw;
             }
         .contenedor-entradas-individuales{
