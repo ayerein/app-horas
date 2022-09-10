@@ -49,7 +49,7 @@ const Principal = ({ correoUsuario }) => {
     
     function calcularHorasTotales(hs) {
         let minutosTotal = hs.reduce((contador, prod) => contador + (prod.minutos) ,0)
-        cambioHorasTotales(`Total de horas trabajadas: ${Math.floor(minutosTotal/60)} horas y ${minutosTotal%60} minutos`)
+        cambioHorasTotales(`Total de horas trabajadas: ${Math.floor(minutosTotal/60)} horas y ${minutosTotal%60} minutos.`)
     }
 
     function limpiarHoras() {

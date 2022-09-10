@@ -1,6 +1,7 @@
 # App Tus Horas
 
-Proyecto personal creado con React, tiene la finalidad de llevar un registro de las horas que ingrese cada usuario.
+Proyecto personal creado con React, tiene la finalidad de llevar un registro de las horas trabajadas que ingrese cada usuario.
+Las horas ingresadas pueden filtrarse por mes y por quincena
 
 Para ver la pagina web puedes ingresar en [este link.](https://web-tus-horas.netlify.app)
 
@@ -15,6 +16,3 @@ Se utilizó para crear la SPA.
 
 * date-fns 2.29.2 -
 Utilizado para tener un mejor manejo de las horas y para las operaciones realizadas entre dias, horas y minutos.
-
-## Caracteristicas a incorporar
- - Filtro de horas por cada mes y quincena.

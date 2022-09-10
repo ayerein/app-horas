@@ -2,16 +2,31 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;;
 }
 
 main{
-    height: 100vh;
+    height: 95vh;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
     
 }
+
+footer{
+    height: 5vh;
+    background-color: #b2a3ff;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    footer a{
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+    }
 
     /* IniciarSesion  */
 
@@ -26,9 +41,10 @@ main{
         box-shadow: 3px 3px 10px 3px rgba(145,145,145,0.72);
     }
     .titulo{
-        color: #33338f;
+        color: #7368cd;
         font-size: 2.2rem;
         margin-bottom: 5vh;
+        font-weight: 800;
     }
     .input-iniciar{
         margin: 1vh 0;
@@ -108,6 +124,9 @@ main{
                     color: white;
                     background-color: #a394fe;
                 }
+            .btn-ver-horas{
+                display: none;
+            }
 
         .cerrar-sesion{
             width: 35vw;
@@ -185,3 +204,112 @@ main{
         .horas-totales{
             font-size: 1.2rem;
         }
+        .btn-ver-agregar-horas{
+            display: none;
+        }
+
+
+    /* Responsive Design */
+
+@media screen and (max-width: 860px){
+    .contenedor-iniciar-sesion{
+        width: 80vw;
+        height: 80vh;
+    }
+        .titulo{
+            margin-bottom: 10vh;
+        }
+        .input-iniciar{
+            width: 50vw;
+        }
+        .error-crear-cuenta{
+            margin-top: 5vh;
+            text-align: center;
+        }
+
+    .contenedor-principal{
+        display: block;
+        height: 90vh;
+    }
+        .contenedor-ingresar-horas{
+            width: 100%;
+            border: none;
+        }
+            .btn-ver-horas{
+                display: flex;
+                margin: 2vh 0;
+                padding: 1vh 5vw;
+                border: 1px solid rgb(160, 160, 160);
+                border-radius: 5px;
+                }
+                    .btn-ver-horas:hover{
+                        cursor: pointer;
+                        color: white;
+                        background-color: #a394fe;
+                    }
+            .contenedor-form{
+                width: 80%;
+            }
+            .cerrar-sesion{
+                width: 100%;
+            }
+
+        .contenedor-entradas{
+            display: none;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+            .contenedor-filtro{
+                margin-top: 3vh;
+                text-align: center;
+            }
+                .seleccionar-mes{
+                    padding: 0.5vh 0;
+                    margin-right: 0;
+                    margin-bottom: 1vh;
+                    width: 35vw;
+                }
+                .seleccionar-quincena{
+                    padding: 0.5vh 0;
+                    margin-right: 0;
+                    width: 35vw;
+                }
+            .contenedor-entradas-individuales{
+                width: 80%;
+                height: 60vh;
+                border-top: 1px solid #a394fe;
+                border-bottom: 1px solid #a394fe;
+            }
+                .entrada-individual{
+                    width: 100%;
+                    height: min-content;
+                    border-bottom: 1px solid #a394fe;
+                }
+                    .p-dia-entrada{
+                        margin-top: 1vh;
+                    }
+                    .btn-eliminar{
+                        padding: 0.5vh 0;
+                        width: 35vw;
+                        margin-bottom: 1vh;
+                    }
+                .btn-ver-agregar-horas{ 
+                    display: block;
+                    margin-bottom: 3vh;
+                    padding: 1vh 0;
+                    width: 45vw;
+                    border: 1px solid rgb(160, 160, 160);
+                    border-radius: 5px;
+                }
+                    .btn-ver-agregar-horas:hover{
+                        cursor: pointer;
+                        color: white;
+                        background-color: #a394fe;
+                    }
+            .horas-totales{
+                text-align: center;
+                width: 80%;
+                font-size: 1rem;
+            }
+}

@@ -4,9 +4,8 @@ import { useEffect, useState } from 'react'
 
 const firestore = getFirestore(appFirebase)
 
-const ContenedorEntradas = ({ horasTotales, entradas, correoUsuario, definirEntradas, calcularHorasTotales, eliminarEntrada, mes, quincena, cambioMes, cambioQuincena }) => {
+const ContenedorEntradas = ({ horasTotales, entradas, correoUsuario, definirEntradas, calcularHorasTotales, mes, quincena, cambioMes, cambioQuincena }) => {
 
-    const [ entradasFiltradas, cambioEntradasFiltradas ] = useState([])
     const [ entradasFiltradasQuincena, cambioEntradasFiltradasQuincena ] = useState([])
     
     async function eliminarEntrada(idEntrada){
@@ -14,7 +13,6 @@ const ContenedorEntradas = ({ horasTotales, entradas, correoUsuario, definirEntr
         const docuRef = doc(firestore, `Usuarios/${correoUsuario}`)
         updateDoc(docuRef, { Horas: [...nuevoArrayEntradas]})
         definirEntradas(nuevoArrayEntradas) 
-        cambioEntradasFiltradas(nuevoArrayEntradas)
         calcularHorasTotales(nuevoArrayEntradas)
     }
 
@@ -34,13 +32,13 @@ const ContenedorEntradas = ({ horasTotales, entradas, correoUsuario, definirEntr
             cambioEntradasFiltradasQuincena(filtradasQuincena)
             calcularHorasTotales(filtradasQuincena)
         } if (quincena === '') {
-            cambioEntradasFiltradasQuincena(entradasFiltradas)
-            calcularHorasTotales(entradasFiltradas)
+            let filtradasQuincena = nuevoArrayEntradas
+            cambioEntradasFiltradasQuincena(filtradasQuincena)
+            calcularHorasTotales(filtradasQuincena)
         }
     }
     useEffect(()=>{
         let nuevoArrayEntradas = (entradas.filter(entrada =>  entrada.mesFormato === parseInt(mes)))
-        cambioEntradasFiltradas(nuevoArrayEntradas)
         calcularHorasTotales(nuevoArrayEntradas)
         filtrarQuincena(nuevoArrayEntradas)
     } , [quincena, mes, entradas])
@@ -50,8 +48,13 @@ const ContenedorEntradas = ({ horasTotales, entradas, correoUsuario, definirEntr
         cambioQuincena('')
     }
 
+    function verAgregarHoras() {
+        document.getElementById('contenedor-ingresar-horas').style.display='flex'
+        document.getElementById('contenedor-entradas').style.display='none'
+    }
+
     return(
-        <div className="contenedor-entradas">
+        <div className="contenedor-entradas" id="contenedor-entradas">
             <div className='contenedor-filtro'>
                 <select name="mes" className='seleccionar-mes' onChange={(e) => {cambiandoMes(e.target.value)}}>
                     <option value="">Filtrar por mes</option>
@@ -90,6 +93,7 @@ const ContenedorEntradas = ({ horasTotales, entradas, correoUsuario, definirEntr
                 }
             </div>
             <p className='horas-totales'>{horasTotales}</p>
+            <button className='btn-ver-agregar-horas' onClick={verAgregarHoras}>Ir a agregar horas</button>
         </div>
     )
 }

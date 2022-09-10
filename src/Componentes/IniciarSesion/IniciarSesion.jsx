@@ -34,14 +34,14 @@ const IniciarSesion = () => {
             {estado ? 
             <>
                 <p className='error-crear-cuenta'>{error}</p>
-                <p className='cambio' onClick={()=> cambiarEstado(false)}>Crear una cuenta</p>
                 <button className='btn-iniciar' onClick={()=> iniciar()}>Iniciar Sesion</button>
+                <p className='cambio' onClick={()=> cambiarEstado(false)}>Crear una cuenta</p>
             </>
             :
             <>
                 <p className='error-crear-cuenta'>{error}</p>
-                <p className='cambio' onClick={()=> cambiarEstado(true)}>Ya tengo una cuenta</p>
                 <button className='btn-iniciar' onClick={()=> crearCuenta()}>Crear Cuenta</button>
+                <p className='cambio' onClick={()=> cambiarEstado(true)}>Ya tengo una cuenta</p>
             </>
         }
         </div>
